@@ -6,8 +6,8 @@
         </a>
     </h1>
 
-    <div>
+    <p>
         <?= $post->excerpt; ?>
-    </div>
+    </p>
 </article>
 <?php endforeach; ?>
