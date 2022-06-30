@@ -1,3 +1,5 @@
+<?php foreach ($posts as $post) : ?>
 <article>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facilis, inventore.</p>
+    <?= $post; ?>
 </article>
+<?php endforeach; ?>
