@@ -8,7 +8,8 @@
     <title>Document</title>
 </head>
 <body>
-    <?= $post; ?>
+<?= $post; ?>
+<a href="/">Go Back</a>
 </body>
 </html>
 
