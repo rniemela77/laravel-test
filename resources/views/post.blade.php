@@ -9,9 +9,9 @@
 </head>
 <body>
 
-<h1><?= $post->title; ?></h1>
+<h1>{{$post->title}}</h1>
 
-<p><?= $post->body; ?></p>
+<p>{!!$post->body!!}</p>
 
 <a href="/">Go Back</a>
 
