@@ -54,7 +54,15 @@ class Post
         // Grab all the blog posts
         $posts = static::all();
 
-        // Return the blog post with the correct slug
-        return $posts->firstWhere('slug', $slug);
+        // Find the post with the matching slug
+        $post = $posts->firstWhere('slug', $slug);
+
+        // If no post is found, throw exception
+        if (!$post) {
+            throw new ModelNotFoundException();
+        }
+
+        // Else, return the post
+        return $post;
     }
 }
