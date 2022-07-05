@@ -19,7 +19,7 @@ Route::get('/', function () {
     // Render the 'posts' view, and pass in the collection of Posts
     return view('posts',
         [
-            'posts' => Post::with('category')->get()
+            'posts' => Post::latest()->with('category')->get()
         ]);
 });
 
