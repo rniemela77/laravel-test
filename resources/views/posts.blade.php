@@ -6,13 +6,16 @@
 
             <x-post-featured-card :post="$posts[0]"/>
 
-            <div class="lg:grid lg:grid-cols-2">
-                @foreach ($posts->skip(1) as $post)
-                    <x-post-card :post="$post"/>
-                @endforeach
-            </div>
+            @if ($posts->count() > 1)
+                <div class="lg:grid lg:grid-cols-2">
+                    @foreach ($posts->skip(1) as $post)
+                        <x-post-card :post="$post"/>
+                    @endforeach
+                </div>
+            @endif
 
         @else
             <p class="text-center">No posts yet. Please check back later.</p>
+        @endif
     </main>
 </x-layout>
