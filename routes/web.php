@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -16,20 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::latest();
-    if (request('search')) {
-        $posts->where('title', 'like', '%' . request('search') . '%')
-            ->orWhere('body', 'like', '%' . request('search') . '%');
-    }
-
-    // Render the 'posts' view, and pass in the collection of Posts
-    return view('posts',
-        [
-            'posts' => $posts->with('category', 'author')->get(),
-            'categories' => Category::all()
-        ]);
-})->name('home');
+Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post}', function (Post $post) { // Post::where('slug', $post)->firstOrFail()
     // Find a post by its slug and pass it to a view called "post"
