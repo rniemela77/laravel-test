@@ -22,4 +22,12 @@ class PostController extends Controller
                 'categories' => Category::all()
             ]);
     }
+
+    public function show(Post $post)
+    {
+        // Find a post by its slug and pass it to a view called "post"
+        return view('post', [
+            'post' => $post
+        ]);
+    }
 }
