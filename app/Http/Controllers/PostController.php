@@ -12,7 +12,7 @@ class PostController extends Controller
         // Render the 'posts' view, and pass in the collection of Posts
         return view('posts',
             [
-                'posts' => $this->getPosts(),
+                'posts' => Post::latest()->filter()->get(),
                 'categories' => Category::all()
             ]);
     }
@@ -23,16 +23,5 @@ class PostController extends Controller
         return view('post', [
             'post' => $post
         ]);
-    }
-
-    public function getPosts()
-    {
-        $posts = Post::latest();
-        if (request('search')) {
-            $posts->where('title', 'like', '%' . request('search') . '%')
-                ->orWhere('body', 'like', '%' . request('search') . '%');
-        }
-
-        return $posts->get();
     }
 }
