@@ -27,12 +27,13 @@ class Post extends Model
             $query->whereHas('category', function ($query) use ($category) {
                 $query->where('slug', $category);
             });
-//            $query
-//                ->whereExists(function ($query) use ($category) {
-//                    $query->from('categories')->
-//                    whereColumn('categories.id', 'posts.category_id')->
-//                    where('categories.slug', $category);
-//                });
+        });
+
+        $query->when($filters['author'] ?? false, function ($query, $author) {
+            // Get posts that have an author, where the author slug matches what the browser requests
+            $query->whereHas('author', function ($query) use ($author) {
+                $query->where('username', $author);
+            });
         });
 
     }

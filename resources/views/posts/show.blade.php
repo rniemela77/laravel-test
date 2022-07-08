@@ -12,7 +12,9 @@
                 <div class="flex items-center lg:justify-center text-sm mt-4">
                     <img src="/images/lary-avatar.svg" alt="Lary avatar">
                     <div class="ml-3 text-left">
-                        <h5 class="font-bold">{{ $post->author->name }}</h5>
+                        <h5 class="font-bold">
+                            <a href="/?author={{ $post->author->username }}">{{ $post->author->name }}</a>
+                        </h5>
                     </div>
                 </div>
             </div>
@@ -34,7 +36,7 @@
                         Back to Posts
                     </a>
 
-                    <x-category-button :category="$post->category" />
+                    <x-category-button :category="$post->category"/>
                 </div>
 
                 <h1 class="font-bold text-3xl lg:text-4xl mb-10">
