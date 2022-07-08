@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -10,7 +9,7 @@ class PostController extends Controller
     public function index()
     {
         // Render the 'posts' view, and pass in the collection of Posts
-        return view('posts',
+        return view('posts.index',
             [
                 'posts' => Post::latest()->filter(request(['search', 'category']))->get()
             ]);
@@ -19,7 +18,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         // Find a post by its slug and pass it to a view called "post"
-        return view('post', [
+        return view('posts.show', [
             'post' => $post
         ]);
     }
