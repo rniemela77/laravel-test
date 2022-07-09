@@ -17,8 +17,8 @@ class RegisterController extends Controller
         // create the user
         $attributes = request()->validate([
             'name' => ['required', 'min:3', 'max:255'],
-            'username' => ['required', 'min:3', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
+            'username' => ['required', 'min:3', 'max:255', Rule::unique('users', 'username')], //make unique on users table, username column
+            'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'min:3']
         ]);
 
