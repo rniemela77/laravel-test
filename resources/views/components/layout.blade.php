@@ -20,7 +20,7 @@
 
                 <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
                     @csrf
-                    
+
                     <button type="submit">Log Out</button>
                 </form>
             @else
