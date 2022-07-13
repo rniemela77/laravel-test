@@ -15,7 +15,7 @@ class Newsletter
             'server' => 'us13'
         ]);
 
-        return $mailchimp->lists->addListMember('feb7cad718', [
+        return $mailchimp->lists->addListMember(config('services.mailchimp.lists.subscribers'), [
             'email_address' => $email,
             'status' => 'subscribed'
         ]);
