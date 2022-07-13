@@ -19,12 +19,10 @@ use Illuminate\Validation\ValidationException;
 |
 */
 
-Route::post('/newsletter', function () {
+Route::post('/newsletter', function (Newsletter $newsletter) {
     request()->validate(['email' => ['required', 'email']]);
 
     try {
-        $newsletter = new Newsletter();
-
         $newsletter->subscribe(request('email'));
     } catch (Exception $e) {
         throw ValidationException::withMessages([
