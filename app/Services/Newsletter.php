@@ -8,16 +8,18 @@ class Newsletter
 {
     public function subscribe(string $email)
     {
-        $mailchimp = new ApiClient();
-
-        $mailchimp->setConfig([
-            'apiKey' => config('services.mailchimp.key'),
-            'server' => 'us13'
-        ]);
-
-        return $mailchimp->lists->addListMember(config('services.mailchimp.lists.subscribers'), [
+        return $this->client()->lists->addListMember(
+            config('services.mailchimp.lists.subscribers'), [
             'email_address' => $email,
             'status' => 'subscribed'
+        ]);
+    }
+
+    protected function client(): ApiClient
+    {
+        return (new ApiClient())->setConfig([
+            'apiKey' => config('services.mailchimp.key'),
+            'server' => 'us13'
         ]);
     }
 }
