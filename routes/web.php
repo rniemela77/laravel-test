@@ -20,12 +20,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ping', function () {
     $mailchimp = new \MailchimpMarketing\ApiClient();
 
-    $mailchimp -> setConfig([
+    $mailchimp->setConfig([
         'apiKey' => config('services.mailchimp.key'),
         'server' => 'us13'
     ]);
 
-    $response = $mailchimp->ping->get();
+//    $response = $mailchimp->ping->get();
+//    $response = $mailchimp->lists->getListMembersInfo('feb7cad718');
+    $response = $mailchimp->lists->addListMember('feb7cad718', [
+        'email_address' => 'gedetid735@satedly.com',
+        'status' => 'subscribed'
+    ]);
+
 
     ddd($response);
 });
