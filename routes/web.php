@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/ping', function () {
+Route::post('/newsletter', function () {
+    request()->validate(['email' => ['required', 'email']]);
+
     $mailchimp = new \MailchimpMarketing\ApiClient();
 
     $mailchimp->setConfig([
@@ -27,13 +29,21 @@ Route::get('/ping', function () {
 
 //    $response = $mailchimp->ping->get();
 //    $response = $mailchimp->lists->getListMembersInfo('feb7cad718');
-    $response = $mailchimp->lists->addListMember('feb7cad718', [
-        'email_address' => 'gedetid735@satedly.com',
-        'status' => 'subscribed'
-    ]);
+    try {
+        $response = $mailchimp->lists->addListMember('feb7cad718', [
+            'email_address' => request('email'),
+            'status' => 'subscribed'
+        ]);
+    } catch (\Exception $e) {
+        throw \Illuminate\Validation\ValidationException::withMessages([
+            'email' => 'This email could not be added to our newsletter list.'
+        ]);
+    }
 
 
-    ddd($response);
+
+//    ddd($response);
+    return redirect('/')->with('success', 'You are now subscribed to our newsletter.');
 });
 
 Route::get('/', [PostController::class, 'index'])->name('home');
