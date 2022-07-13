@@ -17,6 +17,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/ping', function () {
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+
+    $mailchimp -> setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us13'
+    ]);
+
+    $response = $mailchimp->ping->get();
+
+    ddd($response);
+});
+
 Route::get('/', [PostController::class, 'index'])->name('home');
 
 Route::get('posts/{post}', [PostController::class, 'show']);
